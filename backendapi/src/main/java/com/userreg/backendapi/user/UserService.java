@@ -1,5 +1,8 @@
 package com.userreg.backendapi.user;
 
+import com.userreg.backendapi.registration.PasswordConstraintValidator;
+import com.userreg.backendapi.registration.RegistrationRequest;
+import jakarta.security.auth.message.callback.PasswordValidationCallback;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,6 +30,12 @@ public class UserService implements UserDetailsService {
         if(userExists) {
             throw new IllegalStateException("username already exists");
         }
+
+        PasswordConstraintValidator passwordConstraintValidator = new PasswordConstraintValidator();
+        if (!passwordConstraintValidator.isValid(appUser.getPassword(),null )) {
+            throw new IllegalArgumentException("Invalid password.");
+        }
+
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
         appUser.setPassword(encodedPassword);
         userRepository.save(appUser);
