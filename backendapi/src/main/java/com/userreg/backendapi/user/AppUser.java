@@ -17,7 +17,7 @@ import java.util.Collections;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-public class User implements UserDetails {
+public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue (
@@ -30,27 +30,35 @@ public class User implements UserDetails {
             allocationSize = 1
     )
     private Long id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String username;;
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
-    private Boolean locked;
-    private Boolean enabled;
+    private Boolean unlocked = true;
+    private Boolean enabled = true;
 
-    public User(String name, String username, String password, UserRole userRole, Boolean locked, Boolean enabled) {
-        this.name = name;
+    public AppUser(String firstName, String lastName, String username, String password, UserRole userRole) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.userRole = userRole;
-        this.locked = locked;
-        this.enabled = enabled;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.name());
         return Collections.singletonList(authority);
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     @Override
@@ -70,7 +78,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return !locked;
+        return unlocked;
     }
 
     @Override

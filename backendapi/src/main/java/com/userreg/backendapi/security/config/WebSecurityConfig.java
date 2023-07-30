@@ -4,6 +4,7 @@ import com.userreg.backendapi.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @AllArgsConstructor
+//TODO Needs adjustment to function properly due to many deprications
 public class WebSecurityConfig {
 
     private final UserService userService;
@@ -28,10 +30,10 @@ public class WebSecurityConfig {
 
         return http.build();
     }
-    @Bean
-    AuthenticationManagerBuilder auth() {
-       return auth().authenticationProvider(daoAuthenticationProvider());
-    }
+//    @Primary
+//    AuthenticationManagerBuilder auth() {
+//       return auth().authenticationProvider(daoAuthenticationProvider());
+//    }
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
