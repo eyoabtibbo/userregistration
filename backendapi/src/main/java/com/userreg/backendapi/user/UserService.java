@@ -1,8 +1,6 @@
 package com.userreg.backendapi.user;
 
 import com.userreg.backendapi.registration.PasswordConstraintValidator;
-import com.userreg.backendapi.registration.RegistrationRequest;
-import jakarta.security.auth.message.callback.PasswordValidationCallback;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +19,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username).orElseThrow();
     }
 
-    public String signUp (AppUser appUser) {
+    public String signUp (AppUser appUser, String country) {
         if(appUser.getUsername().isEmpty()) {
             throw new IllegalStateException("username cannot be empty");
         }
@@ -36,10 +34,15 @@ public class UserService implements UserDetailsService {
             throw new IllegalArgumentException("Invalid password.");
         }
 
+        if (!country.equals("Canada")) {
+            throw new IllegalStateException("We cannot register you as you are not in Canada");
+        }
+
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
         appUser.setPassword(encodedPassword);
         userRepository.save(appUser);
 
-        return "Signup Successful";
+        //TODO Generate Random UUID
+        return "Signup Successful, Welcome!";
     }
 }
