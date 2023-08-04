@@ -35,6 +35,9 @@ public class UserService implements UserDetailsService {
         }
 
         if (!country.equals("Canada")) {
+            if(country == null){
+                throw new IllegalStateException("could not retrieve country");
+            }
             throw new IllegalStateException("We cannot register you as you are not in Canada");
         }
 

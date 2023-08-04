@@ -1,11 +1,13 @@
 package com.userreg.backendapi.user;
 
+import com.userreg.backendapi.registration.RegistrationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,6 +21,12 @@ public class UserServiceTest {
 
     @Mock
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Mock
+    private RestTemplate restTemplate;
+
+    @InjectMocks
+    private RegistrationService registrationService;
 
     @InjectMocks
     private UserService userService;
@@ -54,5 +62,17 @@ public class UserServiceTest {
         AppUser appUser = new AppUser("Sam", "James", "samJ", "passowrd", UserRole.USER);
 
         assertThrows(IllegalArgumentException.class, () -> userService.signUp(appUser, "Canada"));
+    }
+
+    @Test
+    public void testGetCountry() {
+        //String mockCountry = "{\"country\":\"Canada\"}";
+        String ipAddress = "192.206.151.131"; //192.206.151.131 31.156.170.203
+
+        //when(restTemplate.getForObject("http://ip-api.com/json/" + ipAddress, String.class)).thenReturn(mockCountry);
+
+        String country = registrationService.getCountry(ipAddress);
+        assertEquals("Canada", country);
+
     }
 }
