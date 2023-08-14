@@ -29,6 +29,12 @@ paths:
             text/plain:
               schema:
                 type: string
+        default:
+          description: Unknown Error
+          content:
+            text/plain:
+              schema:
+                type: string
 
 components:
   schemas:
@@ -43,8 +49,8 @@ components:
           type: string
         password:
           type: string
-        required:
-          - firstName
-          - lastName
-          - username
-          - password
+      required:
+        - firstName
+        - lastName
+        - username
+        - password
