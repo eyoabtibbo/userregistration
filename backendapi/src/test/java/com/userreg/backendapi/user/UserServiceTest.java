@@ -1,6 +1,6 @@
 package com.userreg.backendapi.user;
 
-import com.userreg.backendapi.registration.RegistrationService;
+import com.userreg.backendapi.registration.services.RegistrationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

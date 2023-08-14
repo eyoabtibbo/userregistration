@@ -1,6 +1,5 @@
 package com.userreg.backendapi.user;
 
-import com.userreg.backendapi.registration.ValidPassword;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

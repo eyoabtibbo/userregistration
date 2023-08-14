@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
@@ -35,9 +37,6 @@ public class UserService implements UserDetailsService {
         }
 
         if (!country.equals("Canada")) {
-            if(country == null){
-                throw new IllegalStateException("could not retrieve country");
-            }
             throw new IllegalStateException("We cannot register you as you are not in Canada");
         }
 
@@ -45,7 +44,7 @@ public class UserService implements UserDetailsService {
         appUser.setPassword(encodedPassword);
         userRepository.save(appUser);
 
-        //TODO Generate Random UUID
-        return "Signup Successful, Welcome!";
+        UUID uuid = UUID.randomUUID();
+        return "Signup Successful, Welcome! " + uuid;
     }
 }

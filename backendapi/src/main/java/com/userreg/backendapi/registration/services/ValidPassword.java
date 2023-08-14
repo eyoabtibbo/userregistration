@@ -1,5 +1,6 @@
-package com.userreg.backendapi.registration;
+package com.userreg.backendapi.registration.services;
 
+import com.userreg.backendapi.registration.PasswordConstraintValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

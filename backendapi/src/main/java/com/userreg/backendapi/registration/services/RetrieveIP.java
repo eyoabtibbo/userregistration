@@ -1,4 +1,4 @@
-package com.userreg.backendapi.registration;
+package com.userreg.backendapi.registration.services;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -14,7 +14,7 @@ public class RetrieveIP {
 
         for (String header: headers) {
             String addresses = request.getHeader(header);
-            if(addresses.isEmpty() || addresses == null) {
+            if(addresses.isEmpty()) {
                 continue;
             }
             String [] address = addresses.split("\\s*, \\s*");

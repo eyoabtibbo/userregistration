@@ -1,0 +1,50 @@
+openapi: 3.1.0
+info:
+  title: User Registration API
+  version: 1.0.0
+  description: an API that registers users that are located in Canada
+
+paths:
+  /api/registration:
+    post:
+      summary: Register a User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '200':
+          description: Successful Registration
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+
+components:
+  schemas:
+    RegistrationRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        required:
+          - firstName
+          - lastName
+          - username
+          - password

@@ -1,8 +1,7 @@
 package com.userreg.backendapi.registration;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import com.userreg.backendapi.registration.services.RegistrationService;
+import com.userreg.backendapi.registration.services.RetrieveIP;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -21,11 +20,6 @@ public class RegistrationController {
     private RegistrationService registrationService;
 
     @PostMapping
-    @Operation(summary = "Registering User")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successful Registration"),
-            @ApiResponse(responseCode = "400", description = "Bad Request")
-    })
     public ResponseEntity<String> register(@RequestBody @Valid RegistrationRequest request, BindingResult bindingResult, HttpServletRequest servletRequest) {
         String ipAddress = RetrieveIP.getUserIP(servletRequest);
         if (bindingResult.hasErrors()) {

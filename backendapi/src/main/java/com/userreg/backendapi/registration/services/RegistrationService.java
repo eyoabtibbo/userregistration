@@ -1,7 +1,8 @@
-package com.userreg.backendapi.registration;
+package com.userreg.backendapi.registration.services;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.userreg.backendapi.registration.RegistrationRequest;
 import com.userreg.backendapi.user.AppUser;
 import com.userreg.backendapi.user.UserRole;
 import com.userreg.backendapi.user.UserService;

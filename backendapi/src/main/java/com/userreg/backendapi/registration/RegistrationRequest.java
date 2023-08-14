@@ -1,5 +1,6 @@
 package com.userreg.backendapi.registration;
 
+import com.userreg.backendapi.registration.services.ValidPassword;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
