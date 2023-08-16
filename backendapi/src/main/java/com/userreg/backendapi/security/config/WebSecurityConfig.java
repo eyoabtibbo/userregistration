@@ -30,10 +30,6 @@ public class WebSecurityConfig {
 
         return http.build();
     }
-//    @Primary
-//    AuthenticationManagerBuilder auth() {
-//       return auth().authenticationProvider(daoAuthenticationProvider());
-//    }
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
