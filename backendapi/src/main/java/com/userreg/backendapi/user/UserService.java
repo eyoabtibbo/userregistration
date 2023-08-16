@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
         }
 
         if (!country.equals("Canada")) {
-            throw new IllegalStateException("We cannot register you as you are not in Canada");
+            throw new IllegalStateException("You are not eligible to register as you are not located in Canada");
         }
 
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());

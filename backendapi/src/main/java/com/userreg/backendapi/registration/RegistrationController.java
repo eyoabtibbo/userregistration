@@ -23,7 +23,7 @@ public class RegistrationController {
     public ResponseEntity<String> register(@RequestBody @Valid RegistrationRequest request, BindingResult bindingResult, HttpServletRequest servletRequest) {
         String ipAddress = RetrieveIP.getUserIP(servletRequest);
         if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body(bindingResult.getAllErrors().get(0).getDefaultMessage()); //bindingResult.getAllErrors().get(0).getDefaultMessage();
+            return ResponseEntity.badRequest().body(bindingResult.getAllErrors().get(0).getDefaultMessage());
         }
         String response = registrationService.register(request, ipAddress);
         return ResponseEntity.ok(response);
